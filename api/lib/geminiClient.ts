@@ -13,9 +13,9 @@ const DEFAULT_MODEL = process.env.GEMINI_MODEL ?? "gemini-3-flash-preview";
 const DEFAULT_API_URL =
   process.env.GEMINI_API_URL ??
   "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
-const DEFAULT_MAX_TOKENS = Number(process.env.GEMINI_MAX_TOKENS ?? 400);
+const DEFAULT_MAX_TOKENS = Number(process.env.GEMINI_MAX_TOKENS ?? 4000);
 
-const REQUEST_TIMEOUT_MS = 30000;
+const REQUEST_TIMEOUT_MS = 300000;
 
 function getApiKey(): string {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -42,7 +42,8 @@ export async function createChatCompletion(
       model: options.model ?? DEFAULT_MODEL,
       messages,
       temperature: options.temperature ?? 0.7,
-      max_tokens: options.maxTokens ?? DEFAULT_MAX_TOKENS,
+    //   max_tokens: options.maxTokens ?? DEFAULT_MAX_TOKENS,
+      max_tokens: options.maxTokens ?? 4000,
       stream: false
     }),
     signal: controller.signal
